@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoTrack - Tu Huella Verde</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Pantalla de Bienvenida -->
+    <section id="welcome" class="screen active">
+      <h1>🌿 EcoTrack</h1>
+      <p class="subtitle">Tu Huella Verde</p>
+      <p class="inspirational">Empieza a cuidar el planeta, una acción a la vez.</p>
+      <div class="buttons">
+        <button onclick="navigate('login')">Iniciar sesión</button>
+        <button onclick="navigate('register')">Registrarse</button>
+      </div>
+      <footer>v1.0 diseño académico</footer>
+    </section>
+
+    <!-- Pantalla de Registro -->
+    <section id="register" class="screen">
+      <h2>Registro</h2>
+      <input type="text" placeholder="Nombre completo o alias" />
+      <input type="email" placeholder="Correo electrónico" />
+      <input type="password" placeholder="Contraseña" />
+      <button onclick="navigate('dashboard')">Crear cuenta</button>
+      <button class="back" onclick="navigate('welcome')">← Volver</button>
+    </section>
+
+    <!-- Pantalla de Login -->
+    <section id="login" class="screen">
+      <h2>Inicio de sesión</h2>
+      <input type="email" placeholder="Correo electrónico" />
+      <input type="password" placeholder="Contraseña" />
+      <button onclick="navigate('dashboard')">Acceder</button>
+      <a href="#">¿Olvidaste tu contraseña?</a>
+      <button class="google"><i class="fab fa-google"></i> Ingresar con Google</button>
+      <button class="back" onclick="navigate('welcome')">← Volver</button>
+    </section>
+
+    <!-- Pantalla Principal -->
+    <section id="dashboard" class="screen">
+      <h2>Hola, Sofía 👋</h2>
+      <p>Tienes <strong>230 EcoPuntos</strong> esta semana 🐢</p>
+      <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+      <div class="quick-access">
+        <button onclick="navigate('actions')"><i class="fas fa-leaf"></i> Registrar acción</button>
+        <button onclick="navigate('stats')"><i class="fas fa-chart-line"></i> Estadísticas</button>
+        <button onclick="navigate('tips')"><i class="fas fa-lightbulb"></i> Consejos</button>
+        <button onclick="navigate('profile')"><i class="fas fa-user"></i> Perfil</button>
+      </div>
+      <button class="back" onclick="navigate('welcome')">← Volver</button>
+    </section>
+
+    <!-- Registro de Acciones -->
+    <section id="actions" class="screen">
+      <h2>Registro de Acciones</h2>
+      <form id="actionForm">
+        <label><input type="checkbox" value="10" /> Reciclé materiales (+10)</label>
+        <label><input type="checkbox" value="15" /> Usé transporte público (+15)</label>
+        <label><input type="checkbox" value="5" /> Usé mi botella reutilizable (+5)</label>
+        <label><input type="checkbox" value="8" /> Apagué luces innecesarias (+8)</label>
+        <label><input type="checkbox" value="5" /> Reutilicé bolsas (+5)</label>
+        <label><input type="checkbox" value="20" /> Planté un árbol o planta (+20)</label>
+        <button type="button" onclick="saveActions()">Guardar acciones</button>
+      </form>
+      <p id="confirmation"></p>
+      <button class="back" onclick="navigate('dashboard')">← Volver</button>
+    </section>
+
+    <!-- Estadísticas -->
+    <section id="stats" class="screen">
+      <h2>Estadísticas / Progreso</h2>
+      <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+      <p>Has evitado <strong>3 kg de CO₂</strong> este mes.</p>
+      <p>Has completado <strong>15 acciones sostenibles</strong>.</p>
+      <p>🥇 <em>Explorador Verde – Primer semana completa</em></p>
+      <button class="back" onclick="navigate('dashboard')">← Volver</button>
+    </section>
+
+    <!-- Consejos -->
+    <section id="tips" class="screen">
+      <h2>Consejos para cuidar el planeta 🌍</h2>
+      <ul>
+        <li>Evita imprimir si no es necesario.</li>
+        <li>Lleva tu propia bolsa al supermercado.</li>
+        <li>Prefiere botellas reutilizables.</li>
+        <li>Usa transporte compartido.</li>
+        <li>Desconecta tus dispositivos cuando no los uses.</li>
+      </ul>
+      <button class="back" onclick="navigate('dashboard')">← Volver</button>
+    </section>
+
+    <!-- Perfil -->
+    <section id="profile" class="screen">
+      <h2>Perfil del Usuario</h2>
+      <img src="descarga.png" alt="Avatar" />
+      <p><strong>Nombre:</strong> Sofía</p>
+      <p><strong>Nivel ecológico:</strong> 🥇 Explorador Verde</p>
+      <button class="back" onclick="navigate('dashboard')">← Volver</button>
+    </section>
+  </div>
+
+  <script>
+    function navigate(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function saveActions() {
+      const checkboxes = document.querySelectorAll('#actionForm input[type="checkbox"]:checked');
+      let total = 0;
+      checkboxes.forEach(cb => total += parseInt(cb.value));
+      document.getElementById('confirmation').textContent = `¡Acciones registradas con éxito! +${total}`;
+    }
+  </script>
+</body>
+</html>
